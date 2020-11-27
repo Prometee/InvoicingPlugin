@@ -10,9 +10,17 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\InvoicingPlugin\Converter\TaxItemsConverterInterface;
+use Sylius\InvoicingPlugin\Entity\TaxItem;
 
 final class TaxItemsConverterSpec extends ObjectBehavior
 {
+    function let(): void
+    {
+        $this->beConstructedWith(
+            TaxItem::class
+        );
+    }
+
     function it_implements_tax_items_converter_interface(): void
     {
         $this->shouldImplement(TaxItemsConverterInterface::class);

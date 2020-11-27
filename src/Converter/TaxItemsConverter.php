@@ -8,11 +8,24 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\InvoicingPlugin\Entity\TaxItem;
 use Webmozart\Assert\Assert;
 
 final class TaxItemsConverter implements TaxItemsConverterInterface
 {
+    /**
+     * @var string
+     * @psalm-var class-string
+     */
+    private $className;
+
+    /**
+     * @psalm-param class-string $className
+     */
+    public function __construct(string $className)
+    {
+        $this->className = $className;
+    }
+
     public function convert(OrderInterface $order): Collection
     {
         $temporaryTaxItems = [];
@@ -34,7 +47,7 @@ final class TaxItemsConverter implements TaxItemsConverterInterface
         }
 
         foreach ($temporaryTaxItems as $label => $amount) {
-            $taxItems->add(new TaxItem($label, $amount));
+            $taxItems->add(new $this->className($label, $amount));
         }
 
         return $taxItems;
