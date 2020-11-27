@@ -37,6 +37,8 @@
             <argument>%default_channel_color%</argument>
         </service>
 
-        <service id="sylius_invoicing_plugin.custom_factory.invoice" class="Sylius\InvoicingPlugin\Factory\InvoiceFactory" />
+        <service id="sylius_invoicing_plugin.custom_factory.invoice" class="Sylius\InvoicingPlugin\Factory\InvoiceFactory">
+            <argument>%sylius_invoicing_plugin.model.invoice.class%</argument>
+        </service>
     </services>
 </container>
