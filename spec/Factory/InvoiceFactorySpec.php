@@ -8,12 +8,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\InvoicingPlugin\Entity\BillingDataInterface;
+use Sylius\InvoicingPlugin\Entity\Invoice;
 use Sylius\InvoicingPlugin\Entity\InvoiceInterface;
 use Sylius\InvoicingPlugin\Entity\InvoiceShopBillingDataInterface;
 use Sylius\InvoicingPlugin\Factory\InvoiceFactoryInterface;
 
 class InvoiceFactorySpec extends ObjectBehavior
 {
+    public function let()
+    {
+        $this->beConstructedWith(Invoice::class);
+    }
+
     function it_implements_invoice_factory_interface(): void
     {
         $this->shouldImplement(InvoiceFactoryInterface::class);
